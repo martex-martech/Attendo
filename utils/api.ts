@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: '/api', // Your backend URL
+  baseURL: 'https://attendo-backend-kappa.vercel.app/', // Your backend URL
 });
 
 // Add a request interceptor to include the token in headers
@@ -20,3 +20,5 @@ api.interceptors.request.use(
 );
 
 export default api;
+
+
