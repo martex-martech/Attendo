@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import type { User } from '../types';
 import api from '../utils/api';
@@ -30,18 +29,18 @@ const LoginPage: React.FC<{ onLoginSuccess: (user: User, token: string) => void 
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
-            <div className="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-md m-4">
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md m-4">
                 <div className="text-center">
-                    <h1 className="text-3xl font-bold flex items-center justify-center text-gray-800 dark:text-gray-100">
+                    <h1 className="text-3xl font-bold flex items-center justify-center text-gray-800">
                         <Icon name="task_alt" className="mr-2 text-red-500 text-4xl" />
-                        <span>Attendo</span>
+                        <span>Martex</span>
                     </h1>
-                    <p className="text-gray-500 dark:text-gray-400 mt-2">Sign in to your account</p>
+                    <p className="text-gray-500 mt-2">Sign in to your account</p>
                 </div>
                 <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Email Address</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
                         <div className="mt-1">
                             <input
                                 id="email"
@@ -51,14 +50,14 @@ const LoginPage: React.FC<{ onLoginSuccess: (user: User, token: string) => void 
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm bg-white dark:bg-gray-700 dark:text-white"
+                                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm bg-white text-black"
                                 placeholder="you@example.com"
                             />
                         </div>
                     </div>
                     <div>
                         <div className="flex items-center justify-between">
-                            <label htmlFor="password"  className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                            <label htmlFor="password"  className="block text-sm font-medium text-gray-700">Password</label>
                         </div>
                         <div className="mt-1">
                             <input
@@ -69,14 +68,14 @@ const LoginPage: React.FC<{ onLoginSuccess: (user: User, token: string) => void 
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm bg-white dark:bg-gray-700 dark:text-white"
+                                className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-red-500 focus:border-red-500 sm:text-sm bg-white text-black"
                                 placeholder="••••••••"
                             />
                         </div>
                     </div>
 
                     {error && (
-                        <div className="flex items-center text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/50 p-3 rounded-md">
+                        <div className="flex items-center text-sm text-red-600 bg-red-50 p-3 rounded-md">
                             <Icon name="error_outline" className="mr-2" />
                             {error}
                         </div>
@@ -92,7 +91,19 @@ const LoginPage: React.FC<{ onLoginSuccess: (user: User, token: string) => void 
                         </button>
                     </div>
                 </form>
-                
+
+                <div className="mt-6 p-4 bg-gray-100 rounded-md text-sm text-gray-700">
+                    <h3 className="font-semibold mb-2">User Login Info (for reference):</h3>
+                    <ul className="list-disc list-inside space-y-1">
+                        <li><strong>Super Admin:</strong> super@martex.com / superpassword</li>
+                        <li><strong>Admin:</strong> admin@martex.com / adminpassword</li>
+                        <li><strong>Employee:</strong> employee@martex.com / employeepassword</li>
+                    </ul>
+                </div>
+
+                <footer className="text-center py-4 text-gray-500">
+                    © 2025 Martex. All rights reserved.
+                </footer>
             </div>
         </div>
     );

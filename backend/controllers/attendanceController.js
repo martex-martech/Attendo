@@ -63,9 +63,13 @@ const handleClockAction = asyncHandler(async (req, res) => {
 
     switch (action) {
         case 'CLOCK_IN':
-            if (attendance.clockInTime) {
+            if (attendance.clockInTime && !attendance.clockOutTime) {
                 res.status(400);
                 throw new Error('Already clocked in for today');
+            }
+            // Allow clock in again if previously clocked out (reset clockOutTime)
+            if (attendance.clockInTime && attendance.clockOutTime) {
+                attendance.clockOutTime = null;
             }
             attendance.clockInTime = now;
             
@@ -168,6 +172,17 @@ const handleClockAction = asyncHandler(async (req, res) => {
                 attendance.overtime = attendance.workDuration - standardWorkDay;
             }
             responseStatus = 'CLOCKED_OUT';
+
+            // Reset attendance for allowing new clock in on same day
+            // Remove resetting clockInTime and clockOutTime to keep timer running
+            // attendance.clockInTime = null;
+            // attendance.clockOutTime = null;
+            attendance.breaks = [];
+            attendance.totalBreakDuration = 0;
+            attendance.workDuration = 0;
+            attendance.overtime = 0;
+            attendance.status = null;
+
             break;
 
         default:

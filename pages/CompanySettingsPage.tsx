@@ -7,8 +7,8 @@ const Icon = ({ name, className }: { name: string; className?: string }) => (
 );
 
 const SettingsCard: React.FC<{ title: string; icon: string; children: React.ReactNode; }> = ({ title, icon, children }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+    <div className="bg-white p-6 rounded-xl shadow-lg">
+        <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
             <Icon name={icon} className="mr-3 text-red-500" />
             {title}
         </h2>
@@ -112,16 +112,16 @@ const CompanySettingsPage: React.FC = () => {
             <SettingsCard title="Leave Policies" icon="event_note">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Annual Leave Days</label>
-                        <input type="number" value={settings.leavePolicies.annual} onChange={e => handleInputChange(e, 'leavePolicies', 'annual')} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Annual Leave Days</label>
+                        <input type="number" value={settings.leavePolicies.annual} onChange={e => handleInputChange(e, 'leavePolicies', 'annual')} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Medical Leave Days</label>
-                        <input type="number" value={settings.leavePolicies.medical} onChange={e => handleInputChange(e, 'leavePolicies', 'medical')} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Medical Leave Days</label>
+                        <input type="number" value={settings.leavePolicies.medical} onChange={e => handleInputChange(e, 'leavePolicies', 'medical')} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Other Leave Days</label>
-                        <input type="number" value={settings.leavePolicies.other} onChange={e => handleInputChange(e, 'leavePolicies', 'other')} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Other Leave Days</label>
+                        <input type="number" value={settings.leavePolicies.other} onChange={e => handleInputChange(e, 'leavePolicies', 'other')} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                     </div>
                 </div>
             </SettingsCard>
@@ -129,27 +129,27 @@ const CompanySettingsPage: React.FC = () => {
             <SettingsCard title="Working Hours & Punctuality" icon="schedule">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Standard Clock-In Time</label>
-                        <input type="time" value={settings.workingHours.clockIn} onChange={e => handleInputChange(e, 'workingHours', 'clockIn')} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Standard Clock-In Time</label>
+                        <input type="time" value={settings.workingHours.clockIn} onChange={e => handleInputChange(e, 'workingHours', 'clockIn')} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                     </div>
                      <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Late Grace Period (minutes)</label>
-                        <input type="number" value={settings.workingHours.lateGraceMinutes} onChange={e => handleInputChange(e, 'workingHours', 'lateGraceMinutes')} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Late Grace Period (minutes)</label>
+                        <input type="number" value={settings.workingHours.lateGraceMinutes} onChange={e => handleInputChange(e, 'workingHours', 'lateGraceMinutes')} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                     </div>
                 </div>
-                 <div className="pt-4 border-t dark:border-slate-700">
-                    <h3 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Date-Specific Clock-In Overrides</h3>
+                 <div className="pt-4 border-t">
+                    <h3 className="text-md font-semibold text-gray-700 mb-2">Date-Specific Clock-In Overrides</h3>
                     <div className="space-y-2">
                         {settings.dateOverrides.map((override: any, index: number) => (
-                            <div key={index} className="flex items-center justify-between bg-slate-100 dark:bg-slate-700/50 p-2 rounded-md">
-                                <p className="text-sm text-gray-800 dark:text-gray-200">On <span className="font-semibold">{new Date(override.date + 'T00:00:00').toLocaleDateString()}</span>, clock-in is at <span className="font-semibold">{override.clockIn}</span></p>
-                                <button onClick={() => handleRemoveOverride(index)} className="p-1 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50"><Icon name="delete_outline" /></button>
+                            <div key={index} className="flex items-center justify-between bg-slate-100 p-2 rounded-md">
+                                <p className="text-sm text-gray-800">On <span className="font-semibold">{new Date(override.date + 'T00:00:00').toLocaleDateString()}</span>, clock-in is at <span className="font-semibold">{override.clockIn}</span></p>
+                                <button onClick={() => handleRemoveOverride(index)} className="p-1 rounded-full text-red-500 hover:bg-red-100"><Icon name="delete_outline" /></button>
                             </div>
                         ))}
                     </div>
                     <div className="flex items-end gap-2 mt-3">
-                         <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Date</label><input type="date" value={newOverride.date} onChange={e => setNewOverride({...newOverride, date: e.target.value})} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
-                         <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">New Clock-In Time</label><input type="time" value={newOverride.clockIn} onChange={e => setNewOverride({...newOverride, clockIn: e.target.value})} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
+                         <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 mb-1">Date</label><input type="date" value={newOverride.date} onChange={e => setNewOverride({...newOverride, date: e.target.value})} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
+                         <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 mb-1">New Clock-In Time</label><input type="time" value={newOverride.clockIn} onChange={e => setNewOverride({...newOverride, clockIn: e.target.value})} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
                          <button onClick={handleAddOverride} className="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700"><Icon name="add" /></button>
                     </div>
                 </div>
@@ -158,20 +158,20 @@ const CompanySettingsPage: React.FC = () => {
             <SettingsCard title="Holiday Management" icon="celebration">
                  <div className="space-y-2">
                     {settings.holidays.map((holiday: any, index: number) => (
-                        <div key={index} className="flex items-center justify-between bg-slate-100 dark:bg-slate-700/50 p-2 rounded-md">
-                            <p className="text-sm text-gray-800 dark:text-gray-200"><span className="font-semibold">{holiday.name}</span> on <span className="font-semibold">{new Date(holiday.date + 'T00:00:00').toLocaleDateString()}</span></p>
-                            <button onClick={() => handleRemoveHoliday(index)} className="p-1 rounded-full text-red-500 hover:bg-red-100 dark:hover:bg-red-900/50"><Icon name="delete_outline" /></button>
+                        <div key={index} className="flex items-center justify-between bg-slate-100 p-2 rounded-md">
+                            <p className="text-sm text-gray-800"><span className="font-semibold">{holiday.name}</span> on <span className="font-semibold">{new Date(holiday.date + 'T00:00:00').toLocaleDateString()}</span></p>
+                            <button onClick={() => handleRemoveHoliday(index)} className="p-1 rounded-full text-red-500 hover:bg-red-100"><Icon name="delete_outline" /></button>
                         </div>
                     ))}
                  </div>
                  <div className="flex items-end gap-2 mt-3">
-                    <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Holiday Name</label><input type="text" placeholder="e.g. New Year's Day" value={newHoliday.name} onChange={e => setNewHoliday({...newHoliday, name: e.target.value})} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
-                    <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">Date</label><input type="date" value={newHoliday.date} onChange={e => setNewHoliday({...newHoliday, date: e.target.value})} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
+                    <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 mb-1">Holiday Name</label><input type="text" placeholder="e.g. New Year's Day" value={newHoliday.name} onChange={e => setNewHoliday({...newHoliday, name: e.target.value})} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
+                    <div className="flex-grow"><label className="block text-xs font-medium text-gray-700 mb-1">Date</label><input type="date" value={newHoliday.date} onChange={e => setNewHoliday({...newHoliday, date: e.target.value})} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
                     <button onClick={handleAddHoliday} className="bg-slate-600 text-white px-4 py-2 rounded-lg hover:bg-slate-700"><Icon name="add" /></button>
                 </div>
             </SettingsCard>
             
-            <div className="flex justify-end pt-4 mt-6 border-t border-gray-200 dark:border-slate-700">
+            <div className="flex justify-end pt-4 mt-6 border-t border-gray-200">
                 <button 
                     onClick={handleSave} 
                     disabled={isSaving} 

@@ -49,10 +49,10 @@ const getReportStats = asyncHandler(async (req, res) => {
     const totalLates = thisMonthAttendance.filter(r => r.status === 'Late').length;
 
     const stats = [
-        { icon: 'schedule', title: 'Avg. Working Hours', value: `${thisMonthAvg.toFixed(2)}h`, progress: (thisMonthAvg/9)*100, trend: trendText, iconBgColor: 'bg-blue-100 dark:bg-blue-900/50', iconColor: 'text-blue-500' },
-        { icon: 'groups', title: 'Total Employees', value: totalEmployees, progress: 100, trend: 'All active employees', iconBgColor: 'bg-green-100 dark:bg-green-900/50', iconColor: 'text-green-500' },
-        { icon: 'hourglass_bottom', title: 'Total Overtime', value: `${totalOvertime.toFixed(2)}h`, progress: (totalOvertime/50)*100, trend: 'This month', iconBgColor: 'bg-pink-100 dark:bg-pink-900/50', iconColor: 'text-pink-500' },
-        { icon: 'running_with_errors', title: 'Total Lates', value: totalLates, progress: (totalLates/30)*100, trend: 'This month', iconBgColor: 'bg-yellow-100 dark:bg-yellow-900/50', iconColor: 'text-yellow-500' },
+        { icon: 'schedule', title: 'Avg. Working Hours', value: `${thisMonthAvg.toFixed(2)}h`, progress: (thisMonthAvg/9)*100, trend: trendText, iconBgColor: 'bg-blue-300', iconColor: 'text-blue-800' },
+        { icon: 'groups', title: 'Total Employees', value: totalEmployees, progress: 100, trend: 'All active employees', iconBgColor: 'bg-green-300', iconColor: 'text-green-800' },
+        { icon: 'hourglass_bottom', title: 'Total Overtime', value: `${totalOvertime.toFixed(2)}h`, progress: (totalOvertime/50)*100, trend: 'This month', iconBgColor: 'bg-pink-300', iconColor: 'text-pink-800' },
+        { icon: 'running_with_errors', title: 'Total Lates', value: totalLates, progress: (totalLates/30)*100, trend: 'This month', iconBgColor: 'bg-yellow-300', iconColor: 'text-yellow-800' },
     ];
     
     res.json({ success: true, data: stats });

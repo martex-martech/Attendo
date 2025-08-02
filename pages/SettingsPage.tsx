@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Settings, User, UserRole } from '../types';
 import api from '../utils/api';
@@ -12,10 +10,10 @@ const Modal: React.FC<{ children: React.ReactNode; onClose: () => void; title: s
     if (!isOpen) return null;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-md" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center border-b dark:border-slate-700 p-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-md" onClick={e => e.stopPropagation()}>
+                <div className="flex justify-between items-center border-b p-4">
+                    <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -58,20 +56,20 @@ const ChangePasswordForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     return (
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
             <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Current Password</label>
-                <input type="password" value={oldPassword} onChange={e => setOldPassword(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                <input type="password" value={oldPassword} onChange={e => setOldPassword(e.target.value)} required className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
             </div>
             <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">New Password</label>
-                <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                <input type="password" value={newPassword} onChange={e => setNewPassword(e.target.value)} required className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
             </div>
             <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Confirm New Password</label>
-                <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                <input type="password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} required className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
             </div>
             {error && <p className="text-sm text-red-500">{error}</p>}
-            <div className="mt-6 pt-4 flex justify-end border-t dark:border-slate-700">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
+            <div className="mt-6 pt-4 flex justify-end border-t border-gray-200">
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
                 <button type="submit" disabled={isSubmitting} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-400">
                     {isSubmitting ? 'Saving...' : 'Save Password'}
                 </button>
@@ -82,8 +80,8 @@ const ChangePasswordForm: React.FC<{ onClose: () => void }> = ({ onClose }) => {
 
 
 const SettingsCard: React.FC<{ title: string; icon: string; children: React.ReactNode; iconColor?: string }> = ({ title, icon, children, iconColor = 'text-red-500' }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-        <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4 flex items-center">
+    <div className="bg-white p-6 rounded-xl shadow-lg">
+        <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
             <Icon name={icon} className={`mr-3 ${iconColor}`} />
             {title}
         </h2>
@@ -95,10 +93,10 @@ const SettingsCard: React.FC<{ title: string; icon: string; children: React.Reac
 
 const ToggleSwitch: React.FC<{ label: string; enabled: boolean; onChange: (enabled: boolean) => void; }> = ({ label, enabled, onChange }) => (
     <div className="flex items-center justify-between">
-        <span className="text-gray-700 dark:text-gray-300">{label}</span>
+        <span className="text-gray-700">{label}</span>
         <button
             onClick={() => onChange(!enabled)}
-            className={`${enabled ? 'bg-red-500' : 'bg-gray-300 dark:bg-slate-600'} relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
+            className={`${enabled ? 'bg-red-500' : 'bg-gray-300'} relative inline-flex h-6 w-11 items-center rounded-full transition-colors`}
         >
             <span
                 className={`${enabled ? 'translate-x-6' : 'translate-x-1'} inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
@@ -165,14 +163,14 @@ const SettingsPage: React.FC<{ user: User }> = ({ user }) => {
                     {(user.role === UserRole.ADMIN || user.role === UserRole.SUPER_ADMIN) && (
                         <SettingsCard title="General Settings" icon="tune">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Name</label>
-                                <input name="companyName" type="text" value={settings.companyName || ''} onChange={handleInputChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" />
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                                <input name="companyName" type="text" value={settings.companyName || ''} onChange={handleInputChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Company Logo</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Company Logo</label>
                                 <div className="flex items-center gap-4">
-                                    <img src={settings.companyLogo || "/logo-placeholder.png"} alt="Company Logo" className="w-16 h-16 rounded-md bg-slate-200 dark:bg-slate-700 p-1 object-contain" />
-                                    <input type="file" className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 dark:file:bg-red-900/50 dark:file:text-red-300 dark:hover:file:bg-red-900"/>
+                                    <img src={settings.companyLogo || "/logo-placeholder.png"} alt="Company Logo" className="w-16 h-16 rounded-md bg-gray-200 p-1 object-contain" />
+                                    <input type="file" className="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100"/>
                                 </div>
                             </div>
                         </SettingsCard>
@@ -180,37 +178,37 @@ const SettingsPage: React.FC<{ user: User }> = ({ user }) => {
                      <SettingsCard title="Notification Settings" icon="notifications_active">
                         <ToggleSwitch label="Email Notifications" enabled={true} onChange={() => {}} />
                         <ToggleSwitch label="Push Notifications" enabled={false} onChange={() => {}} />
-                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">Control how you receive important updates. (UI only for now)</p>
+                        <p className="text-xs text-gray-500 mt-2">Control how you receive important updates. (UI only for now)</p>
                     </SettingsCard>
                 </div>
                  <div className="space-y-6">
                     <SettingsCard title="Security" icon="security">
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-                            <button onClick={() => setPasswordModalOpen(true)} className="w-full text-left p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-600">Change Password</button>
+                            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <button onClick={() => setPasswordModalOpen(true)} className="w-full text-left p-2 border border-gray-300 rounded-md bg-white text-black hover:bg-gray-50">Change Password</button>
                         </div>
                         <div>
-                             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Two-Factor Authentication</label>
-                            <button className="w-full text-left p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-600">Enable 2FA (Coming Soon)</button>
+                             <label className="block text-sm font-medium text-gray-700 mb-1">Two-Factor Authentication</label>
+                            <button className="w-full text-left p-2 border border-gray-300 rounded-md bg-white text-black hover:bg-gray-50">Enable 2FA (Coming Soon)</button>
                         </div>
                     </SettingsCard>
                     {(user.role === UserRole.ADMIN || user.role === UserRole.SUPER_ADMIN) && (
                          <SettingsCard title="API Integration" icon="api">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Your API Key</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Your API Key</label>
                                  <div className="flex items-center gap-2">
-                                    <input type="text" readOnly value="********************abcd" className="w-full p-2 border dark:border-slate-600 rounded-md bg-slate-100 dark:bg-slate-900 dark:text-gray-400" />
-                                    <button className="p-2 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700 text-gray-600 dark:text-gray-300"><Icon name="content_copy" className="text-sm"/></button>
+                                    <input type="text" readOnly value="********************abcd" className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-gray-600" />
+                                    <button className="p-2 rounded-md hover:bg-gray-100 text-gray-600"><Icon name="content_copy" className="text-sm"/></button>
                                 </div>
                             </div>
-                             <button className="w-full text-left p-2 border border-dashed dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-600 text-center font-semibold text-red-500">Regenerate API Key</button>
+                             <button className="w-full text-left p-2 border border-dashed rounded-md bg-white text-red-500 hover:bg-gray-50 text-center font-semibold">Regenerate API Key</button>
                         </SettingsCard>
                     )}
                 </div>
             </div>
 
             {(user.role === UserRole.ADMIN || user.role === UserRole.SUPER_ADMIN) && (
-                <div className="flex justify-end pt-4 mt-6 border-t border-gray-200 dark:border-slate-700">
+                <div className="flex justify-end pt-4 mt-6 border-t border-gray-200">
                     <button 
                         onClick={handleSave} 
                         disabled={isSaving} 

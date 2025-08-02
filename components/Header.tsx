@@ -44,27 +44,27 @@ const NotificationDropdown: React.FC<{
     setActiveLink: (link: string) => void;
 }> = ({ onClose, notifications, onMarkAsRead, setActiveLink }) => {
     return (
-        <div className="absolute right-0 mt-2 w-80 bg-white dark:bg-slate-800 rounded-xl shadow-2xl z-20 border dark:border-slate-700 origin-top-right animate-fade-in-down">
-            <div className="p-4 border-b dark:border-slate-700">
-                <h3 className="font-bold text-gray-800 dark:text-white">Notifications</h3>
+        <div className="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl z-20 border origin-top-right animate-fade-in-down">
+            <div className="p-4 border-b">
+                <h3 className="font-bold text-gray-800">Notifications</h3>
             </div>
             <div className="max-h-80 overflow-y-auto">
                 {notifications.length === 0 ? (
-                    <p className="text-center text-gray-500 dark:text-gray-400 p-6">No new notifications.</p>
+                    <p className="text-center text-gray-500 p-6">No new notifications.</p>
                 ) : (
                     notifications.map(n => {
                         const { icon, color } = getNotificationIcon(n.type);
                         return (
-                            <div key={n._id} className={`flex items-start gap-3 p-3 transition-colors hover:bg-slate-100 dark:hover:bg-slate-700/50 ${!n.read ? 'bg-blue-50 dark:bg-blue-900/20' : ''}`}>
+                            <div key={n._id} className={`flex items-start gap-3 p-3 transition-colors hover:bg-slate-100 ${!n.read ? 'bg-blue-50' : ''}`}>
                                 <div className="flex-shrink-0 pt-1">
                                     <Icon name={icon} className={color} />
                                 </div>
                                 <div className="flex-1">
-                                    <p className="text-sm text-gray-700 dark:text-gray-200">{n.text}</p>
-                                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{formatTimeAgo(n.createdAt)}</p>
+                                    <p className="text-sm text-gray-700">{n.text}</p>
+                                    <p className="text-xs text-gray-500 mt-0.5">{formatTimeAgo(n.createdAt)}</p>
                                 </div>
                                 {!n.read && (
-                                    <button onClick={() => onMarkAsRead(n._id)} className="p-1 rounded-full hover:bg-blue-200 dark:hover:bg-blue-800" title="Mark as read">
+                                    <button onClick={() => onMarkAsRead(n._id)} className="p-1 rounded-full hover:bg-blue-200" title="Mark as read">
                                         <span className="w-2 h-2 block bg-blue-500 rounded-full"></span>
                                     </button>
                                 )}
@@ -73,7 +73,7 @@ const NotificationDropdown: React.FC<{
                     })
                 )}
             </div>
-            <div className="p-2 border-t dark:border-slate-700 text-center">
+            <div className="p-2 border-t text-center">
                 <a href="#" onClick={(e) => { e.preventDefault(); setActiveLink('Notifications'); onClose(); }} className="text-sm text-red-500 hover:underline font-semibold">View All Notifications</a>
             </div>
         </div>
@@ -137,12 +137,12 @@ const AppHeader: React.FC<HeaderProps> = ({ title, breadcrumbs, actions, userRol
     return (
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-                <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">{title}</h1>
-                <nav className="text-sm text-gray-500 dark:text-gray-400 flex items-center mt-1" aria-label="Breadcrumb">
+                <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
+                <nav className="text-sm text-gray-500 flex items-center mt-1" aria-label="Breadcrumb">
                     {breadcrumbs.map((crumb, index) => (
                         <React.Fragment key={index}>
                             {index === 0 ? null : <Icon name="chevron_right" className="text-base mx-1" />}
-                            <a href={crumb.href || '#'} className={`hover:text-red-500 transition-colors ${index === breadcrumbs.length - 1 ? 'text-gray-800 dark:text-gray-200 font-medium' : ''}`}>
+                            <a href={crumb.href || '#'} className={`hover:text-red-500 transition-colors ${index === breadcrumbs.length - 1 ? 'text-gray-800 font-medium' : ''}`}>
                                 {crumb.label}
                             </a>
                         </React.Fragment>
@@ -151,17 +151,11 @@ const AppHeader: React.FC<HeaderProps> = ({ title, breadcrumbs, actions, userRol
             </div>
             <div className="flex items-center gap-3">
                 {actions}
-                <button
-                    onClick={switchToLightMode}
-                    className="p-2.5 rounded-full bg-white shadow-md text-gray-600 dark:bg-slate-800 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-300"
-                    aria-label="Switch to light mode"
-                >
-                    <Icon name="light_mode" />
-                </button>
+                {/* Light mode only, dark mode toggle removed */}
                 <div className="relative" ref={notificationsRef}>
                     <button
                         onClick={() => setShowNotifications(s => !s)}
-                        className="p-2.5 rounded-full bg-white shadow-md text-gray-600 dark:bg-slate-800 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition-all duration-300"
+                        className="p-2.5 rounded-full bg-white shadow-md text-gray-600 hover:bg-slate-100 transition-all duration-300"
                         aria-label="Notifications"
                     >
                         <Icon name="notifications" />

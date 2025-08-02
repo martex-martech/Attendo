@@ -24,5 +24,4 @@ router.route('/profile/change-password').put(protect, changePassword);
 // --- Admin & Super Admin Parameterized Route (must be last) ---
 router.route('/:id').put(protect, admin, updateUser).delete(protect, admin, deleteUser);
 
-
 export default router;

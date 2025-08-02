@@ -14,7 +14,7 @@ dotenv.config();
 
 const users = [
     {
-        email: 'super@attendo.com',
+        email: 'super@martex.com',
         password: 'superpassword',
         role: 'SUPER_ADMIN',
         name: 'Super Admin',
@@ -25,7 +25,7 @@ const users = [
         status: 'Active',
     },
     {
-        email: 'admin@attendo.com',
+        email: 'admin@martex.com',
         password: 'adminpassword',
         role: 'ADMIN',
         name: 'Adrian',
@@ -36,7 +36,7 @@ const users = [
         status: 'Active',
     },
     {
-        email: 'employee@attendo.com',
+        email: 'employee@martex.com',
         password: 'employeepassword',
         role: 'EMPLOYEE',
         name: 'Stephan Peralt',
@@ -92,7 +92,7 @@ const importData = async () => {
 
         await User.insertMany(createdUsers);
         
-        await Settings.create({ companyName: "Attendo Inc."});
+        await Settings.create({ companyName: "Martex Inc."});
 
         console.log('Data Imported!');
         process.exit();

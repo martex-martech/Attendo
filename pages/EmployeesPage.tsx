@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { exportToCSV } from '../utils';
 import type { User } from '../types';
@@ -13,10 +12,10 @@ const Modal: React.FC<{ children: React.ReactNode; onClose: () => void; title: s
     if (!isOpen) return null;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-2xl" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center border-b dark:border-slate-700 p-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-2xl" onClick={e => e.stopPropagation()}>
+                <div className="flex justify-between items-center border-b p-4">
+                    <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -55,31 +54,31 @@ const AddUserForm: React.FC<{ onAddUser: (data: any) => Promise<void>; onClose: 
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" placeholder="e.g. John Doe" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" placeholder="e.g. John Doe" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" placeholder="e.g. john.doe@example.com" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" placeholder="e.g. john.doe@example.com" required />
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">ID</label>
-                    <input type="text" name="employeeId" value={formData.employeeId} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">ID</label>
+                    <input type="text" name="employeeId" value={formData.employeeId} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" placeholder="e.g. 123-456-7890" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" placeholder="e.g. 123-456-7890" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
-                     <select name="role" value={formData.role} onChange={handleChange} disabled={isAddingAdmin} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white disabled:bg-slate-100 dark:disabled:bg-slate-600" required>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                     <select name="role" value={formData.role} onChange={handleChange} disabled={isAddingAdmin} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black disabled:bg-gray-100" required>
                         <option value={UserRole.EMPLOYEE}>Employee</option>
                         {userRole === UserRole.SUPER_ADMIN && <option value={UserRole.ADMIN}>Admin</option>}
                     </select>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Department</label>
-                    <select name="department" value={formData.department} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white" required>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                    <select name="department" value={formData.department} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required>
                         <option value="">Select Department</option>
                         <option>Design</option>
                         <option>Development</option>
@@ -92,7 +91,7 @@ const AddUserForm: React.FC<{ onAddUser: (data: any) => Promise<void>; onClose: 
                 </div>
             </div>
              <div className="mt-6 flex justify-end">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
                 <button type="submit" disabled={isSubmitting} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300">
                     {isSubmitting ? 'Adding...' : `Add ${isAddingAdmin ? 'Admin' : 'Employee'}`}
                 </button>
@@ -127,31 +126,31 @@ const EditUserForm: React.FC<{ onEditUser: (id: string, data: any) => Promise<vo
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">ID</label>
-                    <input type="text" name="employeeId" value={formData.employeeId} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">ID</label>
+                    <input type="text" name="employeeId" value={formData.employeeId} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Role</label>
-                    <select name="role" value={formData.role} onChange={handleChange} disabled={isEditingAdmin} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white disabled:bg-slate-100 dark:disabled:bg-slate-600" required>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Role</label>
+                    <select name="role" value={formData.role} onChange={handleChange} disabled={isEditingAdmin} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black disabled:bg-gray-100" required>
                         <option value={UserRole.EMPLOYEE}>Employee</option>
                         {userRole === UserRole.SUPER_ADMIN && <option value={UserRole.ADMIN}>Admin</option>}
                     </select>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Department</label>
-                    <select name="department" value={formData.department} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white" required>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                    <select name="department" value={formData.department} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required>
                         <option value="">Select Department</option>
                         <option>Design</option>
                         <option>Development</option>
@@ -163,8 +162,8 @@ const EditUserForm: React.FC<{ onEditUser: (id: string, data: any) => Promise<vo
                     </select>
                 </div>
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
-                    <select name="status" value={formData.status} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white" required>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select name="status" value={formData.status} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required>
                         <option>Active</option>
                         <option>Inactive</option>
                         <option>On Leave</option>
@@ -172,7 +171,7 @@ const EditUserForm: React.FC<{ onEditUser: (id: string, data: any) => Promise<vo
                 </div>
             </div>
              <div className="mt-6 flex justify-end">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
                 <button type="submit" disabled={isSubmitting} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300">
                     {isSubmitting ? 'Saving...' : 'Save Changes'}
                 </button>
@@ -220,7 +219,7 @@ const BulkUploadForm: React.FC<{ onBulkUpload: (users: any[]) => Promise<void>; 
 
     return (
         <div className="space-y-4">
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-800">
                 Upload a CSV file with user data. The file should contain columns in this order: Name, Email, Role, Department, Phone.
             </p>
              <a href="/sample-employees.csv" download className="text-red-500 hover:underline text-sm flex items-center">
@@ -232,10 +231,10 @@ const BulkUploadForm: React.FC<{ onBulkUpload: (users: any[]) => Promise<void>; 
                 <label htmlFor="csv-upload" className="cursor-pointer text-red-500 font-semibold">
                     {file ? file.name : 'Choose a file to upload'}
                 </label>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">CSV files only, max 5MB.</p>
+                <p className="text-xs text-gray-700 mt-1">CSV files only, max 5MB.</p>
             </div>
              <div className="mt-6 flex justify-end">
-                <button onClick={handleUpload} disabled={!file || isProcessing} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 dark:disabled:bg-red-800 flex items-center">
+                <button onClick={handleUpload} disabled={!file || isProcessing} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 flex items-center">
                     {isProcessing ? <Icon name="hourglass_top" className="animate-spin mr-2" /> : <Icon name="upload_file" className="mr-2"/>}
                     {isProcessing ? 'Processing...' : 'Upload & Add'}
                 </button>
@@ -249,13 +248,13 @@ const AddUserModalContent: React.FC<{ onAddUser: (data: any) => Promise<void>; o
     
     return (
         <div>
-            <div className="border-b border-gray-200 dark:border-slate-700">
+            <div className="border-b border-gray-200">
                  <nav className="-mb-px flex space-x-6 px-6" aria-label="Tabs">
-                    <button onClick={() => setActiveTab('single')} className={`${activeTab === 'single' ? 'border-red-500 text-red-600 dark:text-red-400' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200'} whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm`}>
+                    <button onClick={() => setActiveTab('single')} className={`${activeTab === 'single' ? 'border-red-500 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm`}>
                         Add Single {pageMode === 'admin' ? 'Admin' : 'Employee'}
                     </button>
                     {pageMode === 'employee' && (
-                     <button onClick={() => setActiveTab('bulk')} className={`${activeTab === 'bulk' ? 'border-red-500 text-red-600 dark:text-red-400' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-200'} whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm`}>
+                    <button onClick={() => setActiveTab('bulk')} className={`${activeTab === 'bulk' ? 'border-red-500 text-red-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'} whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm`}>
                         Bulk Upload
                     </button>
                     )}
@@ -433,15 +432,15 @@ const UserManagementPage: React.FC<{
 
     const getStatusClass = (status: User['status']) => {
         switch (status) {
-            case 'Active': return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
-            case 'Inactive': return 'bg-gray-100 text-gray-800 dark:bg-slate-700/50 dark:text-gray-300';
-            case 'On Leave': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300';
-            default: return 'bg-gray-100 text-gray-800 dark:bg-slate-700/50 dark:text-gray-300';
+            case 'Active': return 'bg-green-100 text-green-800';
+            case 'Inactive': return 'bg-gray-100 text-gray-800';
+            case 'On Leave': return 'bg-yellow-100 text-yellow-800';
+            default: return 'bg-gray-100 text-gray-800';
         }
     };
     
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+        <div className="bg-white p-6 rounded-xl shadow-lg">
             <Modal isOpen={isAddModalOpen} onClose={() => setAddModalOpen(false)} title={`Add New ${userType}`}>
                 <AddUserModalContent userRole={user.role} pageMode={pageMode} onAddUser={handleAddUser} onBulkUpload={handleBulkAddUsers} onClose={() => setAddModalOpen(false)} />
             </Modal>
@@ -451,9 +450,9 @@ const UserManagementPage: React.FC<{
                 </Modal>
             )}
             <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-                <h1 className="text-xl font-bold text-gray-800 dark:text-gray-100">{pageTitle} ({filteredUsers.length})</h1>
+                <h1 className="text-xl font-bold text-gray-800">{pageTitle} ({filteredUsers.length})</h1>
                 <div className="flex items-center gap-2 w-full md:w-auto">
-                     <button onClick={handleExport} className="bg-white dark:bg-slate-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg flex items-center hover:bg-slate-100 dark:hover:bg-slate-600 transition-colors shadow-sm border border-gray-200 dark:border-slate-600">
+                     <button onClick={handleExport} className="bg-white text-gray-700 px-4 py-2 rounded-lg flex items-center hover:bg-gray-100 transition-colors shadow-sm border border-gray-200">
                         <Icon name="download" className="mr-2 text-sm" /> Export
                     </button>
                     <button onClick={() => setAddModalOpen(true)} className="bg-red-500 text-white px-4 py-2 rounded-lg flex items-center hover:bg-red-600 transition-colors shadow flex-shrink-0">
@@ -469,10 +468,10 @@ const UserManagementPage: React.FC<{
                         placeholder="Search by name, email, ID, role..."
                         value={searchTerm}
                         onChange={e => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 border dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white dark:bg-slate-700 dark:text-white dark:placeholder-gray-400"
+                        className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 bg-white text-black placeholder-gray-400"
                     />
                 </div>
-                <select value={departmentFilter} onChange={e => setDepartmentFilter(e.target.value)} className="p-2 border dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-red-500">
+                <select value={departmentFilter} onChange={e => setDepartmentFilter(e.target.value)} className="p-2 border rounded-lg bg-white text-black focus:outline-none focus:ring-2 focus:ring-red-500">
                     {departmentOptions.map(dept => (
                        <option key={dept} value={dept}>{dept}</option>
                     ))}
@@ -481,47 +480,47 @@ const UserManagementPage: React.FC<{
 
             <div className="overflow-x-auto">
                 <table className="w-full text-left">
-                    <thead className="border-b-2 border-gray-200 dark:border-slate-700">
-                        <tr>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">{userType}</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">ID</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Email</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Department</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Role</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Joined On</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Status</th>
-                            <th className="p-3 text-sm font-semibold text-gray-600 dark:text-gray-400 tracking-wider">Actions</th>
-                        </tr>
-                    </thead>
+            <thead className="border-b-2 border-gray-200">
+                <tr>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">{userType}</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">ID</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Email</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Department</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Role</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Joined On</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Status</th>
+                    <th className="p-3 text-sm font-semibold text-gray-800 tracking-wider">Actions</th>
+                </tr>
+            </thead>
                     <tbody>
                         {isLoading ? (
-                             <tr><td colSpan={8} className="text-center p-6 text-gray-500">Loading...</td></tr>
+                             <tr><td colSpan={8} className="text-center p-6 text-gray-700">Loading...</td></tr>
                         ) : filteredUsers.map((u) => (
-                            <tr key={u.id} className="border-b border-gray-100 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                                <td className="p-3 text-gray-800 dark:text-gray-200 font-medium">
-                                    <div className="flex items-center">
-                                        <img src={u.avatar} alt={u.name} className="w-10 h-10 rounded-full mr-3 object-cover" />
-                                        <span>{u.name}</span>
-                                    </div>
-                                </td>
-                                <td className="p-3 text-gray-600 dark:text-gray-300">{u.employeeId}</td>
-                                <td className="p-3 text-gray-600 dark:text-gray-300">{u.email}</td>
-                                <td className="p-3 text-gray-600 dark:text-gray-300">{u.department}</td>
-                                <td className="p-3 text-gray-600 dark:text-gray-300">{u.role.replace('_', ' ')}</td>
-                                <td className="p-3 text-gray-600 dark:text-gray-300">{new Date(u.joinedOn).toLocaleDateString()}</td>
-                                <td className="p-3">
-                                    <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusClass(u.status)}`}>
-                                        {u.status}
-                                    </span>
-                                </td>
-                                <td className="p-3">
-                                    <ActionsMenu userToManage={u} onEdit={handleOpenEditModal} onDelete={handleDeleteUser} />
-                                </td>
-                            </tr>
+                        <tr key={u.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td className="p-3 text-gray-900 font-medium">
+                                <div className="flex items-center">
+                                    <img src={u.avatar} alt={u.name} className="w-10 h-10 rounded-full mr-3 object-cover" />
+                                    <span className="text-gray-900">{u.name}</span>
+                                </div>
+                            </td>
+                            <td className="p-3 text-gray-800">{u.employeeId}</td>
+                            <td className="p-3 text-gray-800">{u.email}</td>
+                            <td className="p-3 text-gray-800">{u.department}</td>
+                            <td className="p-3 text-gray-800">{u.role.replace('_', ' ')}</td>
+                            <td className="p-3 text-gray-800">{new Date(u.joinedOn).toLocaleDateString()}</td>
+                            <td className="p-3">
+                                <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusClass(u.status)}`}>
+                                    {u.status}
+                                </span>
+                            </td>
+                            <td className="p-3">
+                                <ActionsMenu userToManage={u} onEdit={handleOpenEditModal} onDelete={handleDeleteUser} />
+                            </td>
+                        </tr>
                         ))}
                          {filteredUsers.length === 0 && !isLoading && (
                             <tr>
-                                <td colSpan={8} className="text-center p-6 text-gray-500 dark:text-gray-400">
+                                <td colSpan={8} className="text-center p-6 text-gray-700">
                                     No {userType}s found.
                                 </td>
                             </tr>

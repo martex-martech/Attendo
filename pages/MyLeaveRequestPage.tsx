@@ -11,10 +11,10 @@ const Modal: React.FC<{ children: React.ReactNode; onClose: () => void; title: s
     if(!isOpen) return null;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-md" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center border-b dark:border-slate-700 p-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-md" onClick={e => e.stopPropagation()}>
+                <div className="flex justify-between items-center border-b p-4">
+                    <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -88,40 +88,40 @@ const ApplyLeaveForm: React.FC<{
         <form onSubmit={handleSubmit} className="p-6">
             <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leave Type</label>
-                    <select value={leaveType} onChange={e => setLeaveType(e.target.value as any)} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Leave Type</label>
+                    <select value={leaveType} onChange={e => setLeaveType(e.target.value as any)} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black">
                         <option>Annual Leave</option>
                         <option>Medical Leave</option>
                         <option>Other</option>
                     </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Start Date</label><input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
-                    <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">End Date</label><input type="date" value={toDate} onChange={e => setToDate(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label><input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} required className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-1">End Date</label><input type="date" value={toDate} onChange={e => setToDate(e.target.value)} required className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" /></div>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">No. of Days</label>
-                    <input type="number" value={days} readOnly className="w-full p-2 border dark:border-slate-600 rounded-md bg-slate-100 dark:bg-slate-900 dark:text-white" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">No. of Days</label>
+                    <input type="number" value={days} readOnly className="w-full p-2 border border-gray-300 rounded-md bg-gray-100 text-black" />
                      {balanceError && <p className="text-red-500 text-xs mt-1">{balanceError}</p>}
                 </div>
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reason</label><textarea value={reason} onChange={e => setReason(e.target.value)} required rows={3} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" placeholder="Please provide a reason for your leave..."></textarea></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-1">Reason</label><textarea value={reason} onChange={e => setReason(e.target.value)} required rows={3} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" placeholder="Please provide a reason for your leave..."></textarea></div>
             </div>
-             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200 dark:border-slate-700">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
-                <button type="submit" disabled={!!balanceError} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 dark:disabled:bg-red-700 disabled:cursor-not-allowed">Submit Request</button>
+             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200">
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
+                <button type="submit" disabled={!!balanceError} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 disabled:cursor-not-allowed">Submit Request</button>
             </div>
         </form>
     );
 };
 
 const LeaveBalanceCard: React.FC<{ onApply: () => void, balance: LeaveBalance[] | null }> = ({ onApply, balance }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg h-full">
-        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4">Leave Balance</h2>
+    <div className="bg-white p-6 rounded-xl shadow-lg h-full">
+        <h2 className="text-lg font-bold text-gray-800 mb-4">Leave Balance</h2>
         <div className="space-y-4">
             {balance ? balance.map(leave => (
                 <div key={leave.type}>
                     <div className="flex justify-between mb-1 text-sm">
-                        <span className="font-medium text-gray-700 dark:text-gray-300">{leave.type}</span>
+                        <span className="font-medium text-gray-800">{leave.type}</span>
                         <span className="text-gray-500 dark:text-gray-400">{leave.used} / {leave.total} days</span>
                     </div>
                     <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2.5">
@@ -142,13 +142,13 @@ const LeaveRequestHistory: React.FC<{ requests: LeaveRequest[], isLoading: boole
             case 'Approved': return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
             case 'Rejected': return 'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300';
             case 'Pending': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300';
-            default: return 'bg-gray-100 text-gray-800 dark:bg-slate-700/50 dark:text-gray-300';
+            default: return 'bg-gray-100 text-gray-800';
         }
     };
 
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg h-full">
-            <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-4">My Leave Requests</h2>
+        <div className="bg-white p-6 rounded-xl shadow-lg h-full">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">My Leave Requests</h2>
             <div className="overflow-x-auto">
                 <table className="w-full text-left">
                     <thead className="border-b-2 border-gray-200 dark:border-slate-700">
@@ -169,11 +169,11 @@ const LeaveRequestHistory: React.FC<{ requests: LeaveRequest[], isLoading: boole
                         ) : (
                             requests.map((req) => (
                                 <tr key={req.id} className="border-b border-gray-100 dark:border-slate-700 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
-                                    <td className="p-3 text-gray-700 dark:text-gray-300 font-medium">{req.leaveType}</td>
-                                    <td className="p-3 text-gray-700 dark:text-gray-300">{new Date(req.from).toLocaleDateString()}</td>
-                                    <td className="p-3 text-gray-700 dark:text-gray-300">{new Date(req.to).toLocaleDateString()}</td>
-                                    <td className="p-3 text-gray-700 dark:text-gray-300">{req.days}</td>
-                                    <td className="p-3 text-gray-700 dark:text-gray-300 max-w-xs truncate" title={req.reason}>{req.reason}</td>
+                                    <td className="p-3 text-gray-800 font-medium">{req.leaveType}</td>
+                                    <td className="p-3 text-gray-800">{new Date(req.from).toLocaleDateString()}</td>
+                                    <td className="p-3 text-gray-800">{new Date(req.to).toLocaleDateString()}</td>
+                                    <td className="p-3 text-gray-800">{req.days}</td>
+                                    <td className="p-3 text-gray-800 max-w-xs truncate" title={req.reason}>{req.reason}</td>
                                     <td className="p-3">
                                         <span className={`px-3 py-1 text-xs font-semibold rounded-full ${getStatusClass(req.status)}`}>
                                             {req.status}

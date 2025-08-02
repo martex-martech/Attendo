@@ -6,7 +6,7 @@ const settingsSchema = mongoose.Schema({
     companyName: {
         type: String,
         required: true,
-        default: 'Attendo Inc.'
+        default: 'Martex Inc.'
     },
     companyLogo: {
         type: String

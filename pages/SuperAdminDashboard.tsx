@@ -9,14 +9,14 @@ const Icon = ({ name, className }: { name: string; className?: string }) => (
 );
 
 const StatCard: React.FC<{ data: StatCardData, onViewDetails?: () => void }> = ({ data, onViewDetails }) => (
-    <div className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer" onClick={onViewDetails}>
+    <div className="bg-white p-5 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer" onClick={onViewDetails}>
         <div className="flex items-center justify-between">
             <div className={`p-4 rounded-full ${data.iconBgColor}`}>
                 <Icon name={data.icon} className={`${data.iconColor} text-3xl`} />
             </div>
             <div className="text-right">
-                <h2 className="text-sm text-gray-500 dark:text-gray-400">{data.title}</h2>
-                <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{data.value}</p>
+                <h2 className="text-sm text-gray-700">{data.title}</h2>
+                <p className="text-2xl font-bold text-gray-900">{data.value}</p>
             </div>
         </div>
         <div className="mt-4">
@@ -57,25 +57,25 @@ const formatTimeAgo = (dateString: string) => {
 };
 
 const ActivityFeed: React.FC<{ activities: Notification[], setActiveLink: (link: string) => void; }> = ({ activities, setActiveLink }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg h-full">
-        <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4">Activity Feed</h2>
+    <div className="bg-white p-6 rounded-xl shadow-lg h-full">
+        <h2 className="text-lg font-bold text-gray-900 mb-4">Activity Feed</h2>
         <div className="space-y-4">
             {activities.length > 0 ? activities.map(activity => {
                  const { icon, color } = getNotificationIcon(activity.type);
                  return (
                     <div key={activity._id} className="flex items-start gap-4">
-                        <div className={`mt-1 rounded-full p-2 bg-slate-100 dark:bg-slate-700 ${color}`}>
+                        <div className={`mt-1 rounded-full p-2 bg-gray-100 ${color}`}>
                             <Icon name={icon} className="text-lg" />
                         </div>
                         <div>
-                            <p className="text-sm text-gray-700 dark:text-gray-200">{activity.text}</p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">{formatTimeAgo(activity.createdAt)}</p>
+                            <p className="text-sm text-gray-700">{activity.text}</p>
+                            <p className="text-xs text-gray-500">{formatTimeAgo(activity.createdAt)}</p>
                         </div>
                     </div>
                  )
-            }) : <p className="text-gray-500 dark:text-gray-400 text-center py-8">No recent activity.</p>}
+            }) : <p className="text-gray-500 text-center py-8">No recent activity.</p>}
         </div>
-         <div className="text-center mt-4 border-t border-gray-200 dark:border-slate-700 pt-3">
+         <div className="text-center mt-4 border-t border-gray-200 pt-3">
              <a href="#" onClick={(e) => { e.preventDefault(); setActiveLink('Reports'); }} className="text-red-500 hover:underline cursor-pointer font-semibold text-sm">View All Reports</a>
          </div>
     </div>
@@ -136,37 +136,37 @@ const AttendanceStatusViewer: React.FC<{}> = () => {
             case ClockStatus.CLOCKED_OUT:
                 return (
                     <div className="text-center">
-                         {getStatusPill('Clocked Out', 'bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300')}
-                         <p className="text-gray-500 dark:text-gray-400 text-sm mt-3">Ready for the next shift.</p>
+                         {getStatusPill('Clocked Out', 'bg-red-100 text-red-700')}
+                         <p className="text-gray-500 text-sm mt-3">Ready for the next shift.</p>
                     </div>
                 );
             case ClockStatus.ON_BREAK:
                 return (
                     <div className="text-center">
-                        {getStatusPill('On Break', 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/50 dark:text-yellow-300')}
-                        <p className="text-4xl font-bold text-gray-800 dark:text-gray-100 my-2">{formatDuration(status.breakStartTime)}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Total Work: {formatDuration(status.workStartTime, status.breakStartTime)}</p>
+                        {getStatusPill('On Break', 'bg-yellow-100 text-yellow-700')}
+                        <p className="text-4xl font-bold text-gray-800 my-2">{formatDuration(status.breakStartTime)}</p>
+                        <p className="text-sm text-gray-500">Total Work: {formatDuration(status.workStartTime, status.breakStartTime)}</p>
                     </div>
                 );
             case ClockStatus.CLOCKED_IN:
             default:
                 return (
                     <div className="text-center">
-                        {getStatusPill('Clocked In', 'bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-300')}
-                        <p className="text-4xl font-bold text-gray-800 dark:text-gray-100 my-2">{formatDuration(status.workStartTime)}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">Since {new Date(status.workStartTime || '').toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                        {getStatusPill('Clocked In', 'bg-green-100 text-green-700')}
+                        <p className="text-4xl font-bold text-gray-800 my-2">{formatDuration(status.workStartTime)}</p>
+                        <p className="text-sm text-gray-500">Since {new Date(status.workStartTime || '').toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
                     </div>
                 );
         }
     };
 
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg h-full flex flex-col justify-center">
-            <h2 className="text-lg font-bold text-gray-800 dark:text-gray-100 mb-4 text-center">My Attendance Status</h2>
+        <div className="bg-white p-6 rounded-xl shadow-lg h-full flex flex-col justify-center">
+            <h2 className="text-lg font-bold text-gray-800 mb-4 text-center">My Attendance Status</h2>
              <div className="flex-grow flex items-center justify-center">
                 {renderContent()}
             </div>
-            <p className="text-xs text-center text-gray-400 dark:text-gray-500 mt-4">
+            <p className="text-xs text-center text-gray-400 mt-4">
                 <Icon name="info_outline" className="text-sm mr-1 align-bottom"/>
                 Status is updated automatically by the ID scanner.
             </p>
@@ -201,10 +201,10 @@ const SuperAdminDashboard: React.FC<{
     }
 
     const superAdminStatsCards: StatCardData[] = [
-        { icon: 'manage_accounts', iconBgColor: 'bg-yellow-100 dark:bg-yellow-900/50', iconColor: 'text-yellow-700 dark:text-yellow-300', title: 'Total Admins', value: `${stats.totalAdmins}`, trend: '', trendColor: 'text-green-500' },
-        { icon: 'groups', iconBgColor: 'bg-blue-100 dark:bg-blue-900/50', iconColor: 'text-blue-500 dark:text-blue-300', title: 'Total Employees', value: `${stats.totalEmployees}`, trend: '', trendColor: 'text-gray-500 dark:text-gray-400' },
-        { icon: 'event_available', iconBgColor: 'bg-green-100 dark:bg-green-900/50', iconColor: 'text-green-500 dark:text-green-300', title: 'System Attendance', value: `${stats.attendanceTodayCount}/${stats.totalEmployees + stats.totalAdmins}`, trend: 'Today', trendColor: 'text-gray-500 dark:text-gray-400' },
-        { icon: 'mail', iconBgColor: 'bg-orange-100 dark:bg-orange-900/50', iconColor: 'text-orange-500 dark:text-orange-300', title: 'Pending Requests', value: `${stats.pendingRequestsCount}`, trend: 'Across all departments', trendColor: 'text-orange-500' }, 
+        { icon: 'manage_accounts', iconBgColor: 'bg-yellow-300', iconColor: 'text-yellow-800', title: 'Total Admins', value: `${stats.totalAdmins}`, trend: '', trendColor: 'text-green-500' },
+        { icon: 'groups', iconBgColor: 'bg-blue-300', iconColor: 'text-blue-800', title: 'Total Employees', value: `${stats.totalEmployees}`, trend: '', trendColor: 'text-gray-500' },
+        { icon: 'event_available', iconBgColor: 'bg-green-300', iconColor: 'text-green-800', title: 'System Attendance', value: `${stats.attendanceTodayCount}/${stats.totalEmployees + stats.totalAdmins}`, trend: 'Today', trendColor: 'text-gray-500' },
+        { icon: 'mail', iconBgColor: 'bg-orange-300', iconColor: 'text-orange-800', title: 'Pending Requests', value: `${stats.pendingRequestsCount}`, trend: 'Across all departments', trendColor: 'text-orange-500' }, 
     ];
 
     return (

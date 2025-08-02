@@ -1,4 +1,3 @@
-
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
 
@@ -24,7 +23,6 @@ const getUsers = asyncHandler(async (req, res) => {
     const users = await User.find(query).select('-password');
     res.json({ success: true, data: users });
 });
-
 
 // @desc    Create a user
 // @route   POST /api/users
@@ -214,7 +212,6 @@ const changePassword = asyncHandler(async (req, res) => {
         throw new Error('Invalid old password');
     }
 });
-
 
 export {
     getUsers,

@@ -1,6 +1,6 @@
 # Attendance Management System - Backend
 
-This directory contains the Node.js, Express, and MongoDB backend for the Attendo application.
+This directory contains the Node.js, Express, and MongoDB backend for the Martex application.
 
 ## Prerequisites
 
@@ -31,8 +31,8 @@ cp .env.example .env
 Open the newly created `.env` file and fill in your details:
 
 - **`MONGO_URI`**: Your MongoDB connection string.
-  - For a local MongoDB instance, this will typically be `mongodb://localhost:27017/attendo`.
-  - For MongoDB Atlas, use the connection string provided in your Atlas dashboard.
+- For a local MongoDB instance, this will typically be `mongodb://localhost:27017/martex`.
+- For MongoDB Atlas, use the connection string provided in your Atlas dashboard.
 - **`JWT_SECRET`**: A long, random, and secret string used for signing authentication tokens. You can generate one easily online.
 
 ### 4. Seed the Database (Optional but Recommended)
@@ -57,4 +57,4 @@ Once setup is complete, you can start the backend server.
 npm run server
 ```
 
-The server will start on `http://localhost:5001` (or the port specified in your `.env` file). The frontend application should now be ableto successfully communicate with the backend API.
+The server will start on `http://localhost:5001` (or the port specified in your `.env` file). The frontend application should now be able to successfully communicate with the backend API.

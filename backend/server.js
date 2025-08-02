@@ -15,8 +15,10 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
+
 import companySettingsRoutes from './routes/companySettingsRoutes.js';
 import scannerRoutes from './routes/scannerRoutes.js';
+import funRoutes from './routes/funRoutes.js';
 
 
 dotenv.config();
@@ -44,7 +46,9 @@ app.use('/api/leaves', leaveRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/notifications', notificationRoutes);
+
 app.use('/api/scanner', scannerRoutes);
+app.use('/api/fun', funRoutes);
 
 // Renamed route to avoid conflicts
 app.use('/api/company-settings', companySettingsRoutes);

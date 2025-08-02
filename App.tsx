@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import { UserRole, User, LeaveRequest, Employee } from './types';
 import AdminDashboard from './pages/AdminDashboard';
@@ -19,11 +18,7 @@ import api from './utils/api';
 import AppHeader from './components/Header';
 
 const getInitialDarkMode = () => {
-    const savedMode = localStorage.getItem('isDarkMode');
-    if (savedMode !== null) {
-        return JSON.parse(savedMode);
-    }
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    return false; // Always use light mode
 };
 
 const Icon = ({ name, className }: { name: string; className?: string }) => (
@@ -39,12 +34,12 @@ const SideBar = ({ user, activeLink, setActiveLink, onLogout }: { user: User; ac
     const logoutButtonClass = 'bg-red-500 hover:bg-red-600';
 
     return (
-        <aside className="w-64 bg-white dark:bg-slate-800 text-gray-900 dark:text-white flex flex-col min-h-screen flex-shrink-0 border-r border-gray-200 dark:border-slate-700">
-            <div className="p-4 text-center border-b border-gray-200 dark:border-slate-700 h-[65px] flex items-center justify-center">
-                <h1 className="text-2xl font-bold flex items-center justify-center">
-                    <Icon name={isSuperAdmin ? "shield_person" : "task_alt"} className={`mr-2 ${brandIconColor}`} />
-                    <span>Attendo</span>
-                </h1>
+        <aside className="w-64 bg-white text-gray-900 flex flex-col min-h-screen flex-shrink-0 border-r border-gray-200">
+            <div className="p-4 text-center border-b border-gray-200 h-[65px] flex items-center justify-center">
+                    <h1 className="text-2xl font-bold flex items-center justify-center">
+                        <Icon name={isSuperAdmin ? "shield_person" : "task_alt"} className={`mr-2 ${brandIconColor}`} />
+                        <span>Martex</span>
+                    </h1>
             </div>
             <nav className="flex-grow p-4 space-y-2">
                 {navLinks.map((link) => (
@@ -55,7 +50,7 @@ const SideBar = ({ user, activeLink, setActiveLink, onLogout }: { user: User; ac
                         className={`flex items-center px-4 py-2.5 rounded-lg transition-all duration-300 transform ${
                             activeLink === link.name
                                 ? activeClass
-                                : 'text-gray-500 hover:bg-slate-100 dark:text-gray-400 dark:hover:bg-slate-700 dark:hover:text-white'
+                                : 'text-gray-500 hover:bg-gray-100'
                         }`}
                     >
                         <Icon name={link.icon} className="mr-3" />
@@ -63,12 +58,12 @@ const SideBar = ({ user, activeLink, setActiveLink, onLogout }: { user: User; ac
                     </a>
                 ))}
             </nav>
-            <div className="p-4 border-t border-gray-200 dark:border-slate-700">
+            <div className="p-4 border-t border-gray-200">
                  <div className="flex items-center mb-4">
                     <img src={user.avatar} alt={user.name} className="w-10 h-10 rounded-full mr-3" />
                     <div>
-                        <p className="font-bold text-gray-800 dark:text-white">{user.name}</p>
-                        <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center">
+                        <p className="font-bold text-gray-800">{user.name}</p>
+                        <p className="text-sm text-gray-500 flex items-center">
                            {isSuperAdmin && <Icon name="workspace_premium" className="text-sm mr-1 text-red-400" />}
                            {user.role.replace('_', ' ')}
                         </p>
@@ -93,32 +88,18 @@ const App: React.FC = () => {
         loading: true,
     });
     const [activeLink, setActiveLink] = useState('Dashboard');
-    const [isDarkMode, setIsDarkMode] = useState(getInitialDarkMode);
+    // Removed dark mode state
     
     // Centralized state
     const [allUsers, setAllUsers] = useState<User[]>([]);
     const [leaveRequests, setLeaveRequests] = useState<LeaveRequest[]>([]);
     const [isLoadingData, setIsLoadingData] = useState(false);
     
-    const toggleDarkMode = () => {
-        setIsDarkMode((prevMode: boolean) => !prevMode);
-    };
+    // Removed toggleDarkMode function as it's unused now
 
-    const switchToLightMode = () => {
-        setIsDarkMode(false);
-    };
+    // Removed switchToLightMode
 
-    useEffect(() => {
-        console.log("Dark mode state changed:", isDarkMode);
-        if (isDarkMode) {
-            document.documentElement.classList.add('dark');
-            console.log("Added 'dark' class to document.documentElement");
-        } else {
-            document.documentElement.classList.remove('dark');
-            console.log("Removed 'dark' class from document.documentElement");
-        }
-        localStorage.setItem('isDarkMode', JSON.stringify(isDarkMode));
-    }, [isDarkMode]);
+    // Removed dark mode effect
     
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -282,7 +263,7 @@ const App: React.FC = () => {
     };
 
     if (auth.loading) {
-        return <div className="flex items-center justify-center h-screen bg-slate-100 dark:bg-slate-900"><p className="text-gray-600 dark:text-gray-400">Authenticating...</p></div>;
+        return <div className="flex items-center justify-center h-screen bg-slate-100"><p className="text-gray-600">Authenticating...</p></div>;
     }
 
     if (!auth.user) {
@@ -292,13 +273,16 @@ const App: React.FC = () => {
     const headerProps = getHeaderProps();
 
     return (
-        <div className="flex min-h-screen bg-slate-100 dark:bg-slate-900 font-sans">
+        <div className="flex min-h-screen bg-slate-100 font-sans">
             <SideBar user={auth.user} activeLink={activeLink} setActiveLink={setActiveLink} onLogout={handleLogout} />
-            <main className="flex-1 p-6 overflow-auto">
-                {headerProps && <AppHeader {...headerProps} userRole={auth.user.role} setActiveLink={setActiveLink} isDarkMode={isDarkMode} switchToLightMode={switchToLightMode} />}
-                <div className="mt-6">
+            <main className="flex-1 p-6 overflow-auto flex flex-col justify-between">
+                {headerProps && <AppHeader {...headerProps} userRole={auth.user.role} setActiveLink={setActiveLink} />}
+                <div className="mt-6 flex-grow">
                     {renderContent()}
                 </div>
+                <footer className="text-center py-4 text-gray-500">
+                    © 2025 Martex. All rights reserved.
+                </footer>
             </main>
         </div>
     );

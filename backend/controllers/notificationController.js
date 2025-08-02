@@ -9,8 +9,8 @@ const getNotifications = asyncHandler(async (req, res) => {
     let notifications;
 
     if (req.user.role === 'SUPER_ADMIN') {
-        // Super admin sees all system notifications, but we still limit it
-        notifications = await Notification.find({}).sort({ createdAt: -1 }).limit(20);
+        // Super admin sees only notifications sent to them (not those sent to employees)
+        notifications = await Notification.find({ user: req.user._id }).sort({ createdAt: -1 }).limit(50);
     } else {
         // Admin and Employees see notifications assigned to them
         notifications = await Notification.find({ user: req.user._id }).sort({ createdAt: -1 }).limit(50);
@@ -41,11 +41,6 @@ const markAsRead = asyncHandler(async (req, res) => {
 // @route   PUT /api/notifications/read-all
 // @access  Private
 const markAllAsRead = asyncHandler(async (req, res) => {
-    // This action is only meaningful for users with assigned notifications.
-    if (req.user.role === 'SUPER_ADMIN') {
-        res.status(400).json({ message: 'This action is not applicable for Super Admins.' });
-        return;
-    }
     await Notification.updateMany({ user: req.user._id, read: false }, { $set: { read: true } });
     res.json({ success: true, message: 'All notifications marked as read' });
 });

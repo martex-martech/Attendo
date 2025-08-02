@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import type { Employee, HourStatData, LeaveStat, AttendanceStatus, LeaveStatsData, HourStatsCollection, TimelineSegment, AttendanceHistoryEntry, LeaveRequest, LeaveBalance } from '../types';
 import { ClockStatus } from '../types';
@@ -12,10 +11,10 @@ const Modal: React.FC<{ children: React.ReactNode; onClose: () => void; title: s
     if (!isOpen) return null;
     return (
         <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-center p-4" onClick={onClose}>
-            <div className="bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-lg" onClick={e => e.stopPropagation()}>
-                <div className="flex justify-between items-center border-b dark:border-slate-700 p-4">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{title}</h3>
-                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+            <div className="bg-white rounded-xl shadow-xl w-full max-w-lg" onClick={e => e.stopPropagation()}>
+                <div className="flex justify-between items-center border-b p-4">
+                    <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+                    <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
                         <Icon name="close" />
                     </button>
                 </div>
@@ -57,28 +56,28 @@ const EditProfileModal: React.FC<{ user: Employee; onClose: () => void; onProfil
         <form onSubmit={handleSubmit} className="p-6">
             <div className="space-y-4">
                  <div className="flex items-center space-x-4">
-                    <img src={user.avatar} alt="Avatar preview" className="w-16 h-16 rounded-full" />
+                    <img src={user.avatar} alt="Avatar preview" className="w-16 h-16 rounded-full mr-4" />
                     <div>
                         <p className="text-sm text-gray-500">Avatar is assigned automatically by the system.</p>
                     </div>
                 </div>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="md:col-span-2">
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
-                        <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <input type="text" name="name" value={formData.name} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email Address</label>
-                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" name="email" value={formData.email} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Phone Number</label>
-                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" required />
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" name="phone" value={formData.phone} onChange={handleChange} className="w-full p-2 border border-gray-300 rounded-md bg-white text-black" required />
                     </div>
                 </div>
             </div>
-             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200 dark:border-slate-700">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
+             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200">
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
                 <button type="submit" disabled={isSubmitting} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300">
                     {isSubmitting ? 'Saving...' : 'Save Changes'}
                 </button>
@@ -89,24 +88,24 @@ const EditProfileModal: React.FC<{ user: Employee; onClose: () => void; onProfil
 
 
 const UserProfileCard: React.FC<{ user: Employee; onEdit: () => void; }> = ({ user, onEdit }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
+    <div className="bg-white p-6 rounded-xl shadow-lg">
         <div className="flex items-center justify-between">
             <div className="flex items-center">
                 <img alt={`Profile picture of ${user.name}`} className="w-16 h-16 rounded-full mr-4 object-cover" src={user.avatar} />
                 <div>
-                    <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">{user.name}</h2>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">{user.role} <span className="text-gray-600 dark:text-gray-500">•</span> {user.department}</p>
+                    <h2 className="text-xl font-bold text-gray-800">{user.name}</h2>
+                    <p className="text-sm text-gray-500">{user.role} <span className="text-gray-600">•</span> {user.department}</p>
                 </div>
             </div>
-            <button onClick={onEdit} className="bg-slate-100 dark:bg-slate-700 p-2 rounded-md hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors text-gray-600 dark:text-gray-300">
+            <button onClick={onEdit} className="bg-gray-100 p-2 rounded-md hover:bg-gray-200 transition-colors text-gray-600">
                 <Icon name="edit" />
             </button>
         </div>
         <div className="mt-6 grid grid-cols-2 gap-y-4 text-sm">
-            <div><p className="text-gray-500 dark:text-gray-400">Phone Number</p><p className="text-gray-800 dark:text-gray-200">{user.phone}</p></div>
-            <div><p className="text-gray-500 dark:text-gray-400">Email Address</p><p className="text-gray-800 dark:text-gray-200">{user.email}</p></div>
-            <div><p className="text-gray-500 dark:text-gray-400">Reports To</p><p className="text-gray-800 dark:text-gray-200">{user.reportTo}</p></div>
-            <div><p className="text-gray-500 dark:text-gray-400">Joined on</p><p className="text-gray-800 dark:text-gray-200">{new Date(user.joinedOn).toLocaleDateString()}</p></div>
+            <div><p className="text-gray-500">Phone Number</p><p className="text-gray-800">{user.phone}</p></div>
+            <div><p className="text-gray-500">Email Address</p><p className="text-gray-800">{user.email}</p></div>
+            <div><p className="text-gray-500">Reports To</p><p className="text-gray-800">{user.reportTo}</p></div>
+            <div><p className="text-gray-500">Joined on</p><p className="text-gray-800">{new Date(user.joinedOn).toLocaleDateString()}</p></div>
         </div>
     </div>
 );
@@ -134,31 +133,33 @@ const AttendanceStatusViewer: React.FC<{ status: AttendanceStatus | null; }> = (
     };
 
     const renderContent = () => {
-        if (!status) return <p className="text-gray-500 dark:text-gray-400">Loading attendance status...</p>;
+        if (!status) return <p className="text-gray-500">Loading attendance status...</p>;
         
         switch (status.status) {
             case ClockStatus.CLOCKED_OUT:
                 return (
                     <div className="text-center">
-                        <p className="text-lg text-gray-800 dark:text-gray-100 font-semibold mb-2">{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-                        <p className="text-4xl font-bold text-gray-800 dark:text-gray-100">{currentTime.toLocaleTimeString()}</p>
-                        <div className="mt-6 text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2"><Icon name="badge"/><span>Ready to scan in.</span></div>
+                        <p className="text-lg text-gray-800 font-semibold mb-2">{currentTime.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                        <p className="text-4xl font-bold text-gray-800">{currentTime.toLocaleTimeString()}</p>
+                        <div className="mt-6 text-gray-500 flex items-center justify-center gap-2"><Icon name="badge"/><span>Ready to scan in.</span></div>
                     </div>
                 );
             case ClockStatus.ON_BREAK:
                  return (
                     <div className="text-center">
-                        <p className="text-gray-500 dark:text-gray-400">On Break</p>
-                        <p className="text-4xl font-bold text-gray-800 dark:text-gray-100 my-2">{formatDuration(status.breakStartTime)}</p>
-                         <div className="text-sm text-gray-500 dark:text-gray-400">Total Work: {formatDuration(status.workStartTime, status.breakStartTime)}</div>
+                        <p className="text-gray-500">On Break</p>
+                        <p className="text-4xl font-bold text-gray-800 my-2">{formatDuration(status.breakStartTime)}</p>
+                        <div className="w-full border-t my-4"></div>
+                        <p className="text-sm text-gray-600 mb-4">Total Work: {formatDuration(status.workStartTime, status.breakStartTime)}</p>
                     </div>
                 );
              case ClockStatus.CLOCKED_IN:
                 return (
                     <div className="text-center">
-                        <p className="text-gray-500 dark:text-gray-400">Working</p>
-                        <p className="text-4xl font-bold text-gray-800 dark:text-gray-100 my-2">{formatDuration(status.workStartTime)}</p>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">Clocked in at {new Date(status.workStartTime || '').toLocaleTimeString()}</div>
+                        <p className="text-gray-500">Working</p>
+                        <p className="text-4xl font-bold text-gray-800 my-2">{formatDuration(status.workStartTime)}</p>
+                        <div className="w-full border-t my-4"></div>
+                        <p className="text-sm text-gray-600">Clocked in at {new Date(status.workStartTime || '').toLocaleTimeString()}</p>
                     </div>
                 );
             default:
@@ -167,37 +168,36 @@ const AttendanceStatusViewer: React.FC<{ status: AttendanceStatus | null; }> = (
     };
     
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg flex flex-col items-center justify-center min-h-[260px]">
-            <div className="flex-grow flex items-center justify-center">
-                {status ? renderContent() : <p>Loading...</p>}
-            </div>
-            <p className="text-xs text-center text-gray-400 dark:text-gray-500 mt-4">
-                <Icon name="info_outline" className="text-sm mr-1 align-bottom"/>
-                Status is updated automatically by the ID scanner.
-            </p>
-        </div>
+                    <div className="bg-white p-6 rounded-xl shadow-lg flex flex-col items-center justify-center min-h-[260px]">
+                        <div className="flex-grow flex items-center justify-center">
+                            {status ? renderContent() : <p>Loading...</p>}
+                        </div>
+                        <p className="text-xs text-center text-gray-400 mt-4">
+                            <Icon name="info_outline" className="text-sm mr-1 align-bottom"/>
+                            Status is updated automatically by the ID scanner.
+                        </p>
+                    </div>
     );
 };
 
 const LeaveStatsCard: React.FC<{ stats: LeaveStatsData | null; onApply: () => void; }> = ({ stats, onApply }) => (
-    <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Leave Details</h3>
+    <div className="bg-white p-6 rounded-xl shadow-lg">
         {stats ? (
             <>
                 <div className="grid grid-cols-2 gap-4 text-center">
-                    <div><p className="text-gray-500 dark:text-gray-400 text-sm">Total Allowed</p><p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{stats.totalAllowed}</p></div>
-                    <div><p className="text-gray-500 dark:text-gray-400 text-sm">Taken</p><p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{stats.taken}</p></div>
-                    <div><p className="text-gray-500 dark:text-gray-400 text-sm">Pending</p><p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{stats.pending}</p></div>
-                    <div><p className="text-gray-500 dark:text-gray-400 text-sm">Available</p><p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{stats.available}</p></div>
+                    <div><p className="text-gray-500 text-sm">Total Allowed</p><p className="text-3xl font-bold text-gray-800">{stats.totalAllowed}</p></div>
+                    <div><p className="text-gray-500 text-sm">Taken</p><p className="text-3xl font-bold text-gray-800">{stats.taken}</p></div>
+                    <div><p className="text-gray-500 text-sm">Pending</p><p className="text-3xl font-bold text-gray-800">{stats.pending}</p></div>
+                    <div><p className="text-gray-500 text-sm">Available</p><p className="text-3xl font-bold text-gray-800">{stats.available}</p></div>
                 </div>
-                 <div className="h-px bg-gray-200 dark:bg-slate-700 my-4"></div>
+                 <div className="h-px bg-gray-200 my-4"></div>
                 {stats.breakdown.map(item => (
                     <div key={item.type} className="text-sm mt-2">
                         <div className="flex justify-between mb-1">
                             <span>{item.type}</span>
                             <span className="font-medium">{item.taken} / {item.total}</span>
                         </div>
-                         <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5"><div className={`${item.color} h-1.5 rounded-full`} style={{width: `${Math.min((item.taken/item.total), 1)*100}%`}}></div></div>
+                         <div className="w-full bg-gray-200 rounded-full h-1.5"><div className={`${item.color} h-1.5 rounded-full`} style={{width: `${Math.min((item.taken/item.total), 1)*100}%`}}></div></div>
                     </div>
                 ))}
             </>
@@ -207,13 +207,13 @@ const LeaveStatsCard: React.FC<{ stats: LeaveStatsData | null; onApply: () => vo
 );
 
 const HourStatCard: React.FC<{ stat: HourStatData }> = ({ stat }) => (
-    <div className={`bg-white dark:bg-slate-800 p-4 rounded-xl shadow-lg border-l-4 ${stat.borderColor}`}>
+    <div className={`bg-white p-4 rounded-xl shadow-lg border-l-4 ${stat.borderColor}`}>
         <div className="flex justify-between items-start">
             <div>
-                <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{stat.current.toFixed(2)} <span className="text-gray-500 dark:text-gray-400 text-lg">/ {stat.total}</span></p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{stat.title}</p>
+                <p className="text-2xl font-bold text-gray-800">{stat.current.toFixed(2)} <span className="text-gray-500 text-lg">/ {stat.total}</span></p>
+                <p className="text-sm text-gray-500">{stat.title}</p>
             </div>
-            <div className={`${stat.iconBgColor} dark:bg-opacity-20 p-2 rounded-full`}>
+            <div className={`${stat.iconBgColor} p-2 rounded-full`}>
                 <Icon name={stat.icon} className={stat.iconColor} />
             </div>
         </div>
@@ -232,7 +232,7 @@ const DonutChart: React.FC<{ stats: AttendanceSummaryStat[], total: number }> = 
     return (
         <div className="relative w-40 h-40 mx-auto mb-4 md:mb-0">
             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                <circle cx="18" cy="18" r="15.9155" fill="none" className="text-slate-200 dark:text-slate-700" strokeWidth="3.8"></circle>
+                <circle cx="18" cy="18" r="15.9155" fill="none" className="text-slate-200" strokeWidth="3.8"></circle>
                 {stats.map((stat) => {
                     const offset = cumulativePercentage;
                     cumulativePercentage += stat.percentage;
@@ -249,8 +249,8 @@ const DonutChart: React.FC<{ stats: AttendanceSummaryStat[], total: number }> = 
                 })}
             </svg>
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <p className="text-3xl font-bold text-gray-800 dark:text-gray-100">{total}</p>
-                 <p className="text-xs text-gray-500 dark:text-gray-400">Total Days</p>
+                <p className="text-3xl font-bold text-gray-800">{total}</p>
+                 <p className="text-xs text-gray-500">Total Days</p>
             </div>
         </div>
     );
@@ -259,15 +259,14 @@ const DonutChart: React.FC<{ stats: AttendanceSummaryStat[], total: number }> = 
 const AttendanceSummaryCard: React.FC<{ summary: AttendanceSummaryStat[] | null; totalDays: number; }> = ({ summary, totalDays }) => {
     if (!summary || totalDays === 0) {
         return (
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg flex items-center justify-center text-gray-500 h-full">
+            <div className="bg-white p-6 rounded-xl shadow-lg flex items-center justify-center text-gray-500 h-full">
                 No Attendance Data Available
             </div>
         );
     }
-
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Attendance Summary</h3>
+        <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Attendance Summary</h3>
             <div className="flex flex-col md:flex-row items-center gap-6">
                 <div className="flex-shrink-0">
                     <DonutChart stats={summary} total={totalDays} />
@@ -278,9 +277,9 @@ const AttendanceSummaryCard: React.FC<{ summary: AttendanceSummaryStat[] | null;
                             <div key={stat.status} className="flex justify-between items-center text-sm">
                                 <div className="flex items-center">
                                     <span className={`w-3 h-3 ${stat.color.replace('text-', 'bg-')} rounded-full mr-3`}></span>
-                                    <p className="text-gray-600 dark:text-gray-300">{stat.status}</p>
+                                    <p className="text-gray-600">{stat.status}</p>
                                 </div>
-                                <p className="font-bold text-gray-800 dark:text-gray-100">{stat.count} Day(s)</p>
+                                <p className="font-bold text-gray-800">{stat.count} Day(s)</p>
                             </div>
                         ))}
                     </div>
@@ -293,17 +292,16 @@ const AttendanceSummaryCard: React.FC<{ summary: AttendanceSummaryStat[] | null;
 const DailyTimelineChart: React.FC<{ segments: TimelineSegment[] }> = ({ segments }) => {
     if (segments.length === 0) {
         return (
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-                <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-2">Daily Timeline</h3>
+            <div className="bg-white p-6 rounded-xl shadow-lg">
+                <h3 className="text-lg font-semibold text-gray-700 mb-2">Daily Timeline</h3>
                 <div className="flex items-center justify-center text-gray-500 h-24">Not enough data for today's timeline.</div>
             </div>
         );
     }
-    
     return (
-        <div className="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-lg">
-            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Daily Timeline</h3>
-            <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-4 flex overflow-hidden">
+        <div className="bg-white p-6 rounded-xl shadow-lg">
+            <h3 className="text-lg font-semibold text-gray-700 mb-4">Daily Timeline</h3>
+            <div className="w-full bg-slate-200 rounded-full h-4 flex overflow-hidden">
                 {segments.map((segment, index) => (
                     <div
                         key={index}
@@ -317,7 +315,7 @@ const DailyTimelineChart: React.FC<{ segments: TimelineSegment[] }> = ({ segment
                 {segments.map((segment) => (
                     <div key={segment.type} className="flex items-center">
                         <span className={`w-3 h-3 ${segment.color} rounded-full mr-2`}></span>
-                        <span className="text-gray-600 dark:text-gray-300 capitalize">{segment.type}</span>
+                        <span className="text-gray-600 capitalize">{segment.type}</span>
                     </div>
                 ))}
             </div>
@@ -389,27 +387,27 @@ const ApplyLeaveForm: React.FC<{
         <form onSubmit={handleSubmit} className="p-6">
             <div className="space-y-4">
                 <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Leave Type</label>
-                    <select value={leaveType} onChange={e => setLeaveType(e.target.value as any)} className="w-full p-2 border dark:border-slate-600 rounded-md bg-white dark:bg-slate-700 dark:text-white">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">Leave Type</label>
+                    <select value={leaveType} onChange={e => setLeaveType(e.target.value as any)} className="w-full p-2 border rounded-md bg-white text-black">
                         <option>Annual Leave</option>
                         <option>Medical Leave</option>
                         <option>Other</option>
                     </select>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
-                    <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Start Date</label><input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
-                    <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">End Date</label><input type="date" value={toDate} onChange={e => setToDate(e.target.value)} required className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label><input type="date" value={fromDate} onChange={e => setFromDate(e.target.value)} required className="w-full p-2 border rounded-md bg-white text-black" /></div>
+                    <div><label className="block text-sm font-medium text-gray-700 mb-1">End Date</label><input type="date" value={toDate} onChange={e => setToDate(e.target.value)} required className="w-full p-2 border rounded-md bg-white text-black" /></div>
                 </div>
                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">No. of Days</label>
-                    <input type="number" value={days} readOnly className="w-full p-2 border dark:border-slate-600 rounded-md bg-slate-100 dark:bg-slate-900 dark:text-white" />
+                    <label className="block text-sm font-medium text-gray-700 mb-1">No. of Days</label>
+                    <input type="number" value={days} readOnly className="w-full p-2 border rounded-md bg-gray-100 text-black" />
                      {balanceError && <p className="text-red-500 text-xs mt-1">{balanceError}</p>}
                 </div>
-                <div><label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Reason</label><textarea value={reason} onChange={e => setReason(e.target.value)} required rows={3} className="w-full p-2 border dark:border-slate-600 rounded-md dark:bg-slate-700 dark:text-white" placeholder="Please provide a reason for your leave..."></textarea></div>
+                <div><label className="block text-sm font-medium text-gray-700 mb-1">Reason</label><textarea value={reason} onChange={e => setReason(e.target.value)} required rows={3} className="w-full p-2 border rounded-md bg-white text-black" placeholder="Please provide a reason for your leave..."></textarea></div>
             </div>
-             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200 dark:border-slate-700">
-                <button type="button" onClick={onClose} className="mr-2 bg-slate-200 dark:bg-slate-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500">Cancel</button>
-                <button type="submit" disabled={!!balanceError} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 dark:disabled:bg-red-700 disabled:cursor-not-allowed">Submit Request</button>
+             <div className="mt-6 pt-4 flex justify-end border-t border-gray-200">
+                <button type="button" onClick={onClose} className="mr-2 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">Cancel</button>
+                <button type="submit" disabled={!!balanceError} className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 disabled:bg-red-300 disabled:cursor-not-allowed">Submit Request</button>
             </div>
         </form>
     );
@@ -530,10 +528,10 @@ const EmployeeProfile: React.FC<{ user: Employee; onProfileUpdate: () => void; o
     };
 
     const hourStatCards: HourStatData[] = hourStats ? [
-        { title: 'Total Hours Today', current: hourStats.today.worked, total: 8, icon: 'schedule', iconBgColor: 'bg-orange-100', iconColor: 'text-orange-500', borderColor: 'border-orange-400' },
-        { title: 'Total Hours Week', current: hourStats.week.worked, total: 40, icon: 'calendar_view_week', iconBgColor: 'bg-green-100', iconColor: 'text-green-500', borderColor: 'border-green-400' },
-        { title: 'Total Hours Month', current: hourStats.month.worked, total: 160, icon: 'today', iconBgColor: 'bg-blue-100', iconColor: 'text-blue-500', borderColor: 'border-blue-400' },
-        { title: 'Overtime this Month', current: hourStats.month.overtime, total: 10, icon: 'hourglass_bottom', iconBgColor: 'bg-pink-100', iconColor: 'text-pink-500', borderColor: 'border-pink-400' },
+        { title: 'Total Hours Today', current: hourStats.today.worked, total: 8, icon: 'schedule', iconBgColor: 'bg-orange-300', iconColor: 'text-orange-800', borderColor: 'border-orange-400' },
+        { title: 'Total Hours Week', current: hourStats.week.worked, total: 40, icon: 'calendar_view_week', iconBgColor: 'bg-green-300', iconColor: 'text-green-800', borderColor: 'border-green-400' },
+        { title: 'Total Hours Month', current: hourStats.month.worked, total: 160, icon: 'today', iconBgColor: 'bg-blue-300', iconColor: 'text-blue-800', borderColor: 'border-blue-400' },
+        { title: 'Overtime this Month', current: hourStats.month.overtime, total: 10, icon: 'hourglass_bottom', iconBgColor: 'bg-pink-300', iconColor: 'text-pink-800', borderColor: 'border-pink-400' },
     ] : [];
 
     return (
