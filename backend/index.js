@@ -1,4 +1,3 @@
-
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
@@ -15,49 +14,64 @@ import dashboardRoutes from './routes/dashboardRoutes.js';
 import reportRoutes from './routes/reportRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
 import settingsRoutes from './routes/settingsRoutes.js';
-
 import companySettingsRoutes from './routes/companySettingsRoutes.js';
 import scannerRoutes from './routes/scannerRoutes.js';
 import funRoutes from './routes/funRoutes.js';
 
-
 dotenv.config();
-
 connectDB();
 
 const app = express();
 
-app.use(cors());
+// ✅ Must be first middleware — handle CORS
+const allowedOrigins = ['https://attendo-eta.vercel.app', 'https://attendo-eta.vercel.app/'];
+
+app.use(cors({
+  origin: ['https://attendo-eta.vercel.app', 'https://attendo-eta.vercel.app/', 'http://localhost:5173', 'http://localhost:3000'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  exposedHeaders: ['set-cookie']
+}));
+
+// ✅ Handle preflight OPTIONS requests for all routes
+app.options('*', cors());
+
+// ✅ Handle preflight OPTIONS requests globally
+app.options('*', cors());
+
+// ✅ Parse incoming JSON body
 app.use(express.json());
 
+// ✅ Serve static files (optional)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.get('/api', (req, res) => {
-    res.send('API is running...');
+// ✅ Test Route
+app.get('/', (req, res) => {
+  res.send('Backend running...');
 });
 
-app.use('/api/auth', authRoutes);
+// ✅ API Routes
+app.use('/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/leaves', leaveRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/notifications', notificationRoutes);
-
 app.use('/api/scanner', scannerRoutes);
 app.use('/api/fun', funRoutes);
-
-// Renamed route to avoid conflicts
 app.use('/api/company-settings', companySettingsRoutes);
 app.use('/api/settings', settingsRoutes);
 
-
+// ✅ Error Handling
 app.use(notFound);
 app.use(errorHandler);
 
+// ✅ Server
 const PORT = process.env.PORT || 5001;
-
-app.listen(PORT, console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
